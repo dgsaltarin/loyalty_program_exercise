@@ -13,7 +13,11 @@ func NewMapper() *Mapper {
 }
 
 func (m *Mapper) MapCampaignRequestToCampaign(campaignRequest *request.CreateCampaignRequest) *entity.Campaign {
-	campaign := entity.NewCampaign(campaignRequest.Name, campaignRequest.StartDate, campaignRequest.EndDate, campaignRequest.PointsMultiplier, campaignRequest.CashbackPercentage)
+	campaign := entity.NewCampaign(campaignRequest.Name,
+		campaignRequest.StartDate,
+		campaignRequest.EndDate,
+		campaignRequest.PointsMultiplier,
+		campaignRequest.CashbackPercentage)
 	return campaign
 }
 
