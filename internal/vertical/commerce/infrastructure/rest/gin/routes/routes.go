@@ -9,10 +9,14 @@ type commerceRoutes struct {
 }
 
 func NewCommerceRoutes(group *gin.RouterGroup) *commerceRoutes {
-	return &commerceRoutes{group: group}
+	routes := &commerceRoutes{
+		group: group,
+	}
+	routes.register()
+	return routes
 }
 
-func (r *commerceRoutes) Register() {
+func (r *commerceRoutes) register() {
 	r.group.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "UP"})
 	})
