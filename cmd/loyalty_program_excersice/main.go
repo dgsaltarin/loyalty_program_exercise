@@ -40,6 +40,6 @@ func InvokeDependencyInjectionCommerce(container *dig.Container, routerGroup *gi
 
 func InvokeDependencyInjectionCampaign(container *dig.Container, routerGroup *gin.RouterGroup) error {
 	return container.Invoke(func(h *dependencies.HandlersContainer) {
-		campaignRouter.NewCampaignRoutes(routerGroup.Group("/campaign"))
+		campaignRouter.NewCampaignRoutes(routerGroup.Group("/campaign"), h.CampaignHandler)
 	})
 }
