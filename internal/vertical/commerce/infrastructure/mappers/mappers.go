@@ -7,7 +7,13 @@ import (
 	"github.com/google/uuid"
 )
 
-func mapCreateCommerceRequestToCommerce(request *request.CreateCommerceRequest) *entity.Commerce {
+type Mapper struct{}
+
+func NewMapper() Mapper {
+	return Mapper{}
+}
+
+func (m *Mapper) MapCreateCommerceRequestToCommerce(request *request.CreateCommerceRequest) *entity.Commerce {
 	branches := make([]*entity.Branch, 0)
 	for _, branch := range request.Branches {
 		branches = append(branches, &entity.Branch{
@@ -25,7 +31,7 @@ func mapCreateCommerceRequestToCommerce(request *request.CreateCommerceRequest) 
 	}
 }
 
-func mapCommerceToCreateCommerceResponse(commerce *entity.Commerce) *response.CreateCommerceResponse {
+func (m *Mapper) MapCommerceToCreateCommerceResponse(commerce *entity.Commerce) *response.CreateCommerceResponse {
 	branches := make([]response.CreateBranchResponse, 0)
 	for _, branch := range commerce.Branches {
 		branches = append(branches, response.CreateBranchResponse{
@@ -43,7 +49,7 @@ func mapCommerceToCreateCommerceResponse(commerce *entity.Commerce) *response.Cr
 	}
 }
 
-func mapCreateBranchRequestToBranch(request *request.CreateBranchRequest) *entity.Branch {
+func (m *Mapper) MapCreateBranchRequestToBranch(request *request.CreateBranchRequest) *entity.Branch {
 	return &entity.Branch{
 		ID:         uuid.New().String(),
 		CommerceID: request.CommerceID,
@@ -52,7 +58,7 @@ func mapCreateBranchRequestToBranch(request *request.CreateBranchRequest) *entit
 	}
 }
 
-func mapBranchToCreateBranchResponse(branch *entity.Branch) *response.CreateBranchResponse {
+func (m *Mapper) MapBranchToCreateBranchResponse(branch *entity.Branch) *response.CreateBranchResponse {
 	return &response.CreateBranchResponse{
 		ID:         branch.ID,
 		CommerceID: branch.CommerceID,

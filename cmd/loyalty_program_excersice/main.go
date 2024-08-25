@@ -42,7 +42,7 @@ func SetupGin() *gin.Engine {
 
 func InvokeDependencyInjectionCommerce(container *dig.Container, routerGroup *gin.RouterGroup) error {
 	return container.Invoke(func(h *dependencies.HandlersContainer) {
-		commerceRouter.NewCommerceRoutes(routerGroup.Group("/commerce"))
+		commerceRouter.NewCommerceRoutes(routerGroup.Group("/commerce"), h.CommerceHandler)
 	})
 }
 
