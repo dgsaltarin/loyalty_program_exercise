@@ -30,3 +30,16 @@ func (h *Handlers) CreateCommerce(c *gin.Context) {
 	commerce := h.mapper.MapCreateCommerceRequestToCommerce(request)
 	c.JSON(http.StatusCreated, h.mapper.MapCommerceToCreateCommerceResponse(commerce))
 }
+
+// CreateBranch creates a new branch
+func (h *Handlers) CreateBranch(c *gin.Context) {
+	request := &request.CreateBranchRequest{}
+
+	if err := c.BindJSON(request); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	branch := h.mapper.MapCreateBranchRequestToBranch(request)
+	c.JSON(http.StatusCreated, branch)
+}
