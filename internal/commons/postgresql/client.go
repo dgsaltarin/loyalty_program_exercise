@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/repository/gorm/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -21,6 +22,8 @@ func NewClient() (*gorm.DB, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	db.AutoMigrate(&models.Campaign{})
 
 	return db, nil
 }

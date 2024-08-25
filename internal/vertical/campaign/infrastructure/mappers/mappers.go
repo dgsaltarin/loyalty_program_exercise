@@ -1,6 +1,8 @@
 package mappers
 
 import (
+	"time"
+
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/domain/entity"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/repository/gorm/models"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/rest/request"
@@ -14,11 +16,20 @@ func NewMapper() Mapper {
 }
 
 func (m *Mapper) MapCampaignRequestToCampaign(campaignRequest *request.CreateCampaignRequest) *entity.Campaign {
+	parsedStartDate, err := time.Parse("1/2/2006", campaignRequest.StartDate)
+	if err != nil {
+		return nil
+	}
+
+	parsedEndDate, err := time.Parse("1/2/2006", campaignRequest.EndDate)
+	if err != nil {
+		return nil
+	}
 	campaign := entity.NewCampaign(campaignRequest.Name,
 		campaignRequest.CommerceID,
 		campaignRequest.BranchID,
-		campaignRequest.StartDate,
-		campaignRequest.EndDate,
+		parsedStartDate,
+		parsedEndDate,
 		campaignRequest.PointsMultiplier,
 		campaignRequest.CashbackPercentage)
 	return campaign
