@@ -1,15 +1,23 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/dependencies"
 	campaignRouter "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/rest/gin/routes"
 	commerceRouter "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/infrastructure/rest/gin/routes"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"go.uber.org/dig"
 )
 
 func main() {
 	ginInstance := SetupGin()
+
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Println("Error loading .env file")
+	}
 
 	routerGroup := ginInstance.Group("/api")
 

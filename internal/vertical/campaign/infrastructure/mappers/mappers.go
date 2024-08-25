@@ -9,8 +9,8 @@ import (
 
 type Mapper struct{}
 
-func NewMapper() *Mapper {
-	return &Mapper{}
+func NewMapper() Mapper {
+	return Mapper{}
 }
 
 func (m *Mapper) MapCampaignRequestToCampaign(campaignRequest *request.CreateCampaignRequest) *entity.Campaign {

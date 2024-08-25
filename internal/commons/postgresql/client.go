@@ -9,12 +9,14 @@ import (
 )
 
 func NewClient() (*gorm.DB, error) {
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
-		os.Getenv("POSTGRES_HOST"),
-		os.Getenv("POSTGRES_USER"),
-		os.Getenv("POSTGRES_PASSWORD"),
-		os.Getenv("POSTGRES_DB"),
-		os.Getenv("POSTGRES_PORT"))
+	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
+		os.Getenv("POSTGRESS_HOST"),
+		os.Getenv("POSTGRESS_PORT"),
+		os.Getenv("POSTGRESS_USER"),
+		os.Getenv("POSTGRESS_PASSWORD"),
+		os.Getenv("POSTGRESS_DB"),
+		os.Getenv("POSTGRESS_SSL"),
+	)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return nil, err

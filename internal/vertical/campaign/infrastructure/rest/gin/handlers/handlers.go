@@ -3,19 +3,19 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/application/service"
+	services "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/application"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/mappers"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/rest/request"
 	"github.com/gin-gonic/gin"
 )
 
 type Handlers struct {
-	mapper  *mappers.Mapper
-	service *service.CampaignService
+	mapper  mappers.Mapper
+	service services.CampaignService
 }
 
 // NewHandlers creates a new Handlers instance
-func NewHandlers(mapper *mappers.Mapper, service *service.CampaignService) *Handlers {
+func NewHandlers(mapper mappers.Mapper, service services.CampaignService) *Handlers {
 	return &Handlers{
 		mapper:  mapper,
 		service: service,
