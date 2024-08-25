@@ -2,6 +2,7 @@ package gorm
 
 import (
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/domain/entity"
+  "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/domain/repository"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/mappers"
 	"gorm.io/gorm"
 )
