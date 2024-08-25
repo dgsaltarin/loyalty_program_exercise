@@ -16,21 +16,22 @@ func NewMapper() Mapper {
 
 // MapCreateCommerceRequestToCommerce maps a CreateCommerceRequest to a Commerce entity
 func (m *Mapper) MapCreateCommerceRequestToCommerce(request *request.CreateCommerceRequest) *entity.Commerce {
+	commerce := entity.NewCommerce(
+		request.Name,
+		request.Address,
+	)
 	branches := make([]*entity.Branch, 0)
 	for _, branch := range request.Branches {
 		branches = append(branches, &entity.Branch{
 			ID:         uuid.New().String(),
-			CommerceID: "",
+			CommerceID: commerce.ID,
 			Name:       branch.Name,
 			Address:    branch.Address,
 		})
 	}
-	return &entity.Commerce{
-		ID:       uuid.New().String(),
-		Name:     request.Name,
-		Address:  request.Address,
-		Branches: branches,
-	}
+
+	commerce.Branches = branches
+	return commerce
 }
 
 // MapCommerceToCreateCommerceResponse maps a Commerce entity to a CreateCommerceResponse
@@ -55,10 +56,9 @@ func (m *Mapper) MapCommerceToCreateCommerceResponse(commerce *entity.Commerce) 
 // MapCreateBranchRequestToBranch maps a CreateBranchRequest to a Branch entity
 func (m *Mapper) MapCreateBranchRequestToBranch(request *request.CreateBranchRequest) *entity.Branch {
 	return &entity.Branch{
-		ID:         uuid.New().String(),
-		CommerceID: request.CommerceID,
-		Name:       request.Name,
-		Address:    request.Address,
+		ID:      uuid.New().String(),
+		Name:    request.Name,
+		Address: request.Address,
 	}
 }
 

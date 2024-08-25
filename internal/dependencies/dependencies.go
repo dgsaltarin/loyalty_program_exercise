@@ -7,7 +7,9 @@ import (
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/repository/gorm"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/rest/gin/handlers"
 	campaignHandler "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/rest/gin/handlers"
+	commerceService "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/application/service"
 	commerMapper "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/infrastructure/mappers"
+	gormCommerce "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/infrastructure/repository/gorm"
 	commerceHandler "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/infrastructure/rest/gin/handlers"
 	"go.uber.org/dig"
 )
@@ -30,6 +32,8 @@ func NewWire() *dig.Container {
 
 	// Inject CommerceHandler dependencies
 	container.Provide(commerMapper.NewMapper)
+	container.Provide(gormCommerce.NewGormCommerceRepository)
+	container.Provide(commerceService.NewCommerceService)
 	container.Provide(commerceHandler.NewHandlers)
 
 	container.Provide(func(campaignHandler *handlers.Handlers, commercehandler *commerceHandler.Handlers) *HandlersContainer {

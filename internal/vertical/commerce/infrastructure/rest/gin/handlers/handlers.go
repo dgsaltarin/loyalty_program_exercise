@@ -3,18 +3,21 @@ package handlers
 import (
 	"net/http"
 
+	services "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/application"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/infrastructure/mappers"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/infrastructure/rest/request"
 	"github.com/gin-gonic/gin"
 )
 
 type Handlers struct {
-	mapper mappers.Mapper
+	mapper  mappers.Mapper
+	service services.CommerceServices
 }
 
-func NewHandlers(mapper mappers.Mapper) *Handlers {
+func NewHandlers(mapper mappers.Mapper, service services.CommerceServices) *Handlers {
 	return &Handlers{
-		mapper: mapper,
+		mapper:  mapper,
+		service: service,
 	}
 }
 
@@ -28,6 +31,12 @@ func (h *Handlers) CreateCommerce(c *gin.Context) {
 	}
 
 	commerce := h.mapper.MapCreateCommerceRequestToCommerce(request)
+	commerce, err := h.service.CreateCommerce(commerce)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
 	c.JSON(http.StatusCreated, h.mapper.MapCommerceToCreateCommerceResponse(commerce))
 }
 

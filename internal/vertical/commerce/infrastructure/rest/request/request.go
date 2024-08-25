@@ -7,7 +7,6 @@ type CreateCommerceRequest struct {
 }
 
 type CreateBranchRequest struct {
-	Name       string `json:"name"`
-	Address    string `json:"address"`
-	CommerceID string `json:"commerce_id"`
+	Name    string `json:"name"`
+	Address string `json:"address"`
 }

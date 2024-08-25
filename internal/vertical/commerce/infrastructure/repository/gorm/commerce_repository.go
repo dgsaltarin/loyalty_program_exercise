@@ -2,6 +2,7 @@ package gorm
 
 import (
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/domain/entity"
+	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/domain/repository"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/infrastructure/mappers"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/infrastructure/repository/gorm/models"
 	"gorm.io/gorm"
@@ -13,7 +14,7 @@ type CommerceRepository struct {
 }
 
 // NewGormCommerceRepository creates a new instance of a CommerceRepository
-func NewGormCommerceRepository(db *gorm.DB, mapper mappers.Mapper) *CommerceRepository {
+func NewGormCommerceRepository(db *gorm.DB, mapper mappers.Mapper) repository.CommerceRepository {
 	return &CommerceRepository{
 		db:     db,
 		mapper: mapper,

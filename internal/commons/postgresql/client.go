@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/repository/gorm/models"
+	campaignModels "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/repository/gorm/models"
+	commerceModels "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/infrastructure/repository/gorm/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -23,7 +24,7 @@ func NewClient() (*gorm.DB, error) {
 		return nil, err
 	}
 
-	db.AutoMigrate(&models.Campaign{})
+	db.AutoMigrate(&campaignModels.Campaign{}, &commerceModels.Commerce{}, &commerceModels.Branch{})
 
 	return db, nil
 }

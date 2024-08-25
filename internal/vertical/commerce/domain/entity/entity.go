@@ -18,16 +18,15 @@ type Branch struct {
 	Address    string
 }
 
-func (c *Commerce) NewCommerce(name, address string, branches []*Branch) *Commerce {
+func NewCommerce(name, address string) *Commerce {
 	return &Commerce{
-		ID:       uuid.New().String(),
-		Name:     name,
-		Address:  address,
-		Branches: branches,
+		ID:      uuid.New().String(),
+		Name:    name,
+		Address: address,
 	}
 }
 
-func (b *Branch) NewBranch(commerceID, name, address string) *Branch {
+func NewBranch(commerceID, name, address string) *Branch {
 	return &Branch{
 		ID:         uuid.New().String(),
 		CommerceID: commerceID,

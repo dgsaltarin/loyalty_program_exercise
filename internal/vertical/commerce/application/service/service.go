@@ -1,15 +1,23 @@
 package service
 
 import (
+	services "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/application"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/domain/entity"
+	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/domain/repository"
 )
 
-type commerceService struct{}
+type commerceService struct {
+	repository repository.CommerceRepository
+}
 
-type branchService struct{}
+type branchService struct {
+	repository repository.BranchRepository
+}
 
-func NewCommerceService() *commerceService {
-	return &commerceService{}
+func NewCommerceService(repository repository.CommerceRepository) services.CommerceServices {
+	return &commerceService{
+		repository: repository,
+	}
 }
 
 func NewBranchService() *branchService {
@@ -17,7 +25,7 @@ func NewBranchService() *branchService {
 }
 
 func (s *commerceService) CreateCommerce(entity *entity.Commerce) (*entity.Commerce, error) {
-	return nil, nil
+	return s.repository.CreateCommerce(entity)
 }
 
 func (s *commerceService) GetCommerceByID(id string) (*entity.Commerce, error) {
