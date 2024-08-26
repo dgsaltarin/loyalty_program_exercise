@@ -1,6 +1,9 @@
 package gorm
 
 import (
+	"time"
+
+	modelsCampaign "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/repository/gorm/models"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/transaction/domain/entity"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/transaction/domain/repository"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/transaction/infrastructure/mappers"
@@ -22,11 +25,12 @@ func NewGormTransactionRepository(gorm *gorm.DB, mapper mappers.Mapper) reposito
 }
 
 func (r *gormTransactionRepository) CreateTransaction(transaction *entity.Transaction) (*entity.Transaction, error) {
-	modelTransaction := r.mapper.MapTransactionToTransactionModel(transaction)
+	newTransaction := entity.NewTransaction(*transaction)
+	modelTransaction := r.mapper.MapTransactionToTransactionModel(newTransaction)
 	if err := r.gorm.Create(modelTransaction).Error; err != nil {
 		return nil, err
 	}
-	return transaction, nil
+	return newTransaction, nil
 }
 
 func (r *gormTransactionRepository) GetTransactionsByCommerceID(commerceID string) ([]*entity.Transaction, error) {
@@ -51,4 +55,22 @@ func (r *gormTransactionRepository) GetTransactionsByUserDocument(documentType s
 		transactionList = append(transactionList, r.mapper.MapTransactionModelToTransaction(modelTransaction))
 	}
 	return transactionList, nil
+}
+
+// check if commerce has an active campaign
+func (r *gormTransactionRepository) CheckCommerceHasActiveCampaign(commerceID string) (bool, error) {
+	campaigns := []*modelsCampaign.Campaign{}
+	if err := r.gorm.Where("commerce_id = ? AND start_date <= ? AND end_date >= ?", commerceID, time.Now(), time.Now()).Find(&campaigns).Error; err != nil {
+		return false, err
+	}
+	return len(campaigns) > 0, nil
+}
+
+// check if branch has an active campaign
+func (r *gormTransactionRepository) CheckBranchHasActiveCampaign(branchID string) (bool, error) {
+	campaigns := []*modelsCampaign.Campaign{}
+	if err := r.gorm.Where("branch_id = ? AND start_date <= ? AND end_date >= ?", branchID, time.Now(), time.Now()).Find(&campaigns).Error; err != nil {
+		return false, err
+	}
+	return len(campaigns) > 0, nil
 }

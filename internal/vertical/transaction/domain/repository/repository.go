@@ -8,4 +8,6 @@ type TransactionRepository interface {
 	CreateTransaction(transaction *entity.Transaction) (*entity.Transaction, error)
 	GetTransactionsByCommerceID(commerceID string) ([]*entity.Transaction, error)
 	GetTransactionsByUserDocument(documentType string, documentNumber string) ([]*entity.Transaction, error)
+	CheckCommerceHasActiveCampaign(commerceID string) (bool, error)
+	CheckBranchHasActiveCampaign(branchID string) (bool, error)
 }

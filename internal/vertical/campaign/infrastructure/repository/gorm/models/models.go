@@ -9,8 +9,8 @@ import (
 type Campaign struct {
 	ID                 string    `gorm:"primaryKey;colum:campaign_id"`
 	Name               string    `gorm:"column:name"`
-	CommerceID         string    `gorm:"column:commerce_id"`
-	BranchID           string    `gorm:"column:branch_id"`
+	CommerceID         string    `gorm:"column:commerce_id;foreignKey:CommerceID"`
+	BranchID           string    `gorm:"column:branch_id;foreignKey:BranchID"`
 	StartDate          time.Time `gorm:"column:start_date"`
 	EndDate            time.Time `gorm:"column:end_date"`
 	PointsMultiplier   float64   `gorm:"column:points_multiplier"`

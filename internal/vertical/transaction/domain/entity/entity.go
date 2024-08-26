@@ -28,6 +28,6 @@ func NewTransaction(transaction Transaction) *Transaction {
 		Amount:          transaction.Amount,
 		PointsEarned:    transaction.PointsEarned,
 		CashbackEarned:  transaction.CashbackEarned,
-		TransactionDate: transaction.TransactionDate,
+		TransactionDate: time.Now(),
 	}
 }

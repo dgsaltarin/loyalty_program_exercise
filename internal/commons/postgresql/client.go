@@ -25,7 +25,7 @@ func NewClient() (*gorm.DB, error) {
 		return nil, err
 	}
 
-	db.AutoMigrate(&campaignModels.Campaign{}, &commerceModels.Commerce{}, &commerceModels.Branch{}, &transactionModels.Transaction{})
+	db.AutoMigrate(&commerceModels.Commerce{}, commerceModels.Branch{}, &campaignModels.Campaign{}, &transactionModels.Transaction{})
 
 	return db, nil
 }
