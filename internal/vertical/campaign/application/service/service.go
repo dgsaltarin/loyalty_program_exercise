@@ -21,14 +21,14 @@ func (c *campaignService) CreateCampaign(campaign *entity.Campaign) (*entity.Cam
 	return c.repository.CreateCampaign(campaign)
 }
 
-// getCampaigns retrieves all campaigns
-func (c *campaignService) GetCampaigns() ([]*entity.Campaign, error) {
-	return c.repository.GetCampaigns()
+// getCampaignByCommerceID returns all campaigns by commerce id
+func (c *campaignService) GetCampaignByCommerceID(commerceID string) ([]*entity.Campaign, error) {
+	return c.repository.GetCampaignsByCommerceID(commerceID)
 }
 
-// getCampaignByID retrieves a campaign by its ID
-func (c *campaignService) GetCampaignByID(id string) (*entity.Campaign, error) {
-	return c.repository.GetCampaignByID(id)
+// getCampaignsByBranchID returns all campaigns by branch id
+func (c *campaignService) GetCampaignsByBranchID(branchID string) ([]*entity.Campaign, error) {
+	return c.repository.GetCampaignsByBranchID(branchID)
 }
 
 // updateCampaign updates a campaign

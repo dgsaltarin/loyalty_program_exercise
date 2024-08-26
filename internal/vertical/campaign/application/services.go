@@ -4,7 +4,7 @@ import "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campai
 
 type CampaignService interface {
 	CreateCampaign(campaign *entity.Campaign) (*entity.Campaign, error)
-	GetCampaigns() ([]*entity.Campaign, error)
-	GetCampaignByID(id string) (*entity.Campaign, error)
+	GetCampaignByCommerceID(commerceID string) ([]*entity.Campaign, error)
+	GetCampaignsByBranchID(branchID string) ([]*entity.Campaign, error)
 	UpdateCampaign(campaign *entity.Campaign) (*entity.Campaign, error)
 }

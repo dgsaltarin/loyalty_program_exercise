@@ -24,4 +24,6 @@ func (r *campaignRoutes) register() {
 		c.JSON(200, gin.H{"status": "This is Campaign"})
 	})
 	r.group.POST("/", r.handler.CreateCampaign)
+	r.group.GET("/:commerce_id", r.handler.GetCampaignsByCommerceID)
+	r.group.PUT("/", r.handler.UpdateCampaign)
 }

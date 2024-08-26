@@ -34,26 +34,31 @@ func (r *gormCampaignRepository) CreateCampaign(campaign *entity.Campaign) (*ent
 	return campaign, nil
 }
 
-// GetCampaignByID retrieves a campaign from the database by its ID
-func (r *gormCampaignRepository) GetCampaignByID(ID string) (*entity.Campaign, error) {
-	modelCampaign := &models.Campaign{}
-	if err := r.db.Where("campaign_id = ?", ID).First(modelCampaign).Error; err != nil {
+// GetCampaignsByCommerceID retrieves all campaigns from the database by commerce id
+func (r *gormCampaignRepository) GetCampaignsByCommerceID(commerceID string) ([]*entity.Campaign, error) {
+	campaigns := []*models.Campaign{}
+	if err := r.db.Where("commerce_id = ?", commerceID).Find(&campaigns).Error; err != nil {
 		return nil, err
 	}
-	return r.mapper.MapModelCampaignToCampaign(modelCampaign), nil
+
+	campaignList := []*entity.Campaign{}
+	for _, modelCampaign := range campaigns {
+		campaignList = append(campaignList, r.mapper.MapModelCampaignToCampaign(modelCampaign))
+	}
+	return campaignList, nil
 }
 
-// GetCampaigns retrieves all campaigns from the database
-func (r *gormCampaignRepository) GetCampaigns() ([]*entity.Campaign, error) {
-	modelCampaigns := []*models.Campaign{}
-	if err := r.db.Find(&modelCampaigns).Error; err != nil {
+// GetCampaignsByBranchID retrieves all campaigns from the database by branch id
+func (r *gormCampaignRepository) GetCampaignsByBranchID(branchID string) ([]*entity.Campaign, error) {
+	campaigns := []*models.Campaign{}
+	if err := r.db.Where("branch_id = ?", branchID).Find(&campaigns).Error; err != nil {
 		return nil, err
 	}
-	campaigns := []*entity.Campaign{}
-	for _, modelCampaign := range modelCampaigns {
-		campaigns = append(campaigns, r.mapper.MapModelCampaignToCampaign(modelCampaign))
+	campaignList := []*entity.Campaign{}
+	for _, modelCampaign := range campaigns {
+		campaignList = append(campaignList, r.mapper.MapModelCampaignToCampaign(modelCampaign))
 	}
-	return campaigns, nil
+	return campaignList, nil
 }
 
 // UpdateCampaign updates a campaign in the database

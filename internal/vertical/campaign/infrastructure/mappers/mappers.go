@@ -74,3 +74,23 @@ func (m *Mapper) MapModelCampaignToCampaign(modelCampaign *models.Campaign) *ent
 		CashbackPercentage: modelCampaign.CashbackPercentage,
 	}
 }
+
+func (m *Mapper) MapUpdateCampaignRequestToCampaign(request *request.UpdateCampaignRequest) *entity.Campaign {
+	parsedStartDate, err := time.Parse("1/2/2006", request.StartDate)
+	if err != nil {
+		return nil
+	}
+
+	parsedEndDate, err := time.Parse("1/2/2006", request.EndDate)
+	if err != nil {
+		return nil
+	}
+	campaign := entity.NewCampaign(request.Name,
+		request.CommerceID,
+		request.BranchID,
+		parsedStartDate,
+		parsedEndDate,
+		request.PointsMultiplier,
+		request.CashbackPercentage)
+	return campaign
+}

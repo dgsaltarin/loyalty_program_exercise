@@ -6,6 +6,7 @@ import (
 	services "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/application"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/mappers"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/rest/request"
+	"github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/rest/response"
 	"github.com/gin-gonic/gin"
 )
 
@@ -39,4 +40,57 @@ func (h *Handlers) CreateCampaign(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusCreated, h.mapper.MapCampaignToCampaignResponse(createdCampaign))
+}
+
+// GetCampaignsByCommerceID returns all campaigns by commerce id
+func (h *Handlers) GetCampaignsByCommerceID(c *gin.Context) {
+	commerceID := c.Param("commerce_id")
+	campaigns, err := h.service.GetCampaignByCommerceID(commerceID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	var campaignsResponse []*response.CampaignResponse
+	for _, campaign := range campaigns {
+		campaignsResponse = append(campaignsResponse, h.mapper.MapCampaignToCampaignResponse(campaign))
+	}
+
+	c.JSON(http.StatusOK, campaignsResponse)
+}
+
+// GetCampaignsByBranchID returns all campaigns by branch id
+func (h *Handlers) GetCampaignsByBranchID(c *gin.Context) {
+	branchID := c.Param("branch_id")
+	campaigns, err := h.service.GetCampaignsByBranchID(branchID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	var campaignsResponse []*response.CampaignResponse
+	for _, campaign := range campaigns {
+		campaignsResponse = append(campaignsResponse, h.mapper.MapCampaignToCampaignResponse(campaign))
+	}
+
+	c.JSON(http.StatusOK, campaignsResponse)
+}
+
+// UpdateCampaign updates a campaigns
+func (h *Handlers) UpdateCampaign(c *gin.Context) {
+	var campaignRequest request.UpdateCampaignRequest
+
+	if err := c.BindJSON(&campaignRequest); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	campaign := h.mapper.MapUpdateCampaignRequestToCampaign(&campaignRequest)
+	updatedCampaign, err := h.service.UpdateCampaign(campaign)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, h.mapper.MapCampaignToCampaignResponse(updatedCampaign))
 }
