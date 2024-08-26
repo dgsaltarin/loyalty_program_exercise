@@ -38,3 +38,7 @@ func (h *Handlers) CreateTransaction(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, h.mappers.MapTransactionToTransactionResponse(createdTransaction))
 }
+
+func (h *Handlers) GetTransactionsByUserDocument(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"status": "This is Transaction"})
+}
