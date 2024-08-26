@@ -16,16 +16,16 @@ type Transaction struct {
 	TransactionDate string
 }
 
-func NewTransaction(userID, commerceID, branchID, campaignID string, amount, pointsEarned, cashbackEarned float64, transactionDate string) *Transaction {
+func NewTransaction(transaction Transaction) *Transaction {
 	return &Transaction{
 		ID:              uuid.New().String(),
-		UserID:          userID,
-		CommerceID:      commerceID,
-		BranchID:        branchID,
-		CampaignID:      campaignID,
-		Amount:          amount,
-		PointsEarned:    pointsEarned,
-		CashbackEarned:  cashbackEarned,
-		TransactionDate: transactionDate,
+		UserID:          transaction.UserID,
+		CommerceID:      transaction.CommerceID,
+		BranchID:        transaction.BranchID,
+		CampaignID:      transaction.CampaignID,
+		Amount:          transaction.Amount,
+		PointsEarned:    transaction.PointsEarned,
+		CashbackEarned:  transaction.CashbackEarned,
+		TransactionDate: transaction.TransactionDate,
 	}
 }
