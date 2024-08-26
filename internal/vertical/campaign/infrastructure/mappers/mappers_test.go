@@ -16,8 +16,8 @@ func Test_Mapper_MapCampaignRequestToCampaign(t *testing.T) {
 	mapper := NewMapper()
 	request := &request.CreateCampaignRequest{
 		Name:               "Campaign",
-		StartDate:          time.Now(),
-		EndDate:            time.Now().AddDate(0, 1, 0),
+		StartDate:          time.Now().String(),
+		EndDate:            time.Now().AddDate(0, 1, 0).String(),
 		PointsMultiplier:   2.0,
 		CashbackPercentage: 0.1,
 	}
