@@ -6,6 +6,7 @@ import (
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/dependencies"
 	campaignRouter "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/rest/gin/routes"
 	commerceRouter "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/infrastructure/rest/gin/routes"
+	transactionRouter "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/transaction/infrastructure/rest/gin/router"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"go.uber.org/dig"
@@ -31,6 +32,10 @@ func main() {
 		panic(err)
 	}
 
+	if err := InvokeDependencyInjectionTransaction(container, routerGroup); err != nil {
+		panic(err)
+	}
+
 	ginInstance.Run(":8080")
 }
 
@@ -49,5 +54,11 @@ func InvokeDependencyInjectionCommerce(container *dig.Container, routerGroup *gi
 func InvokeDependencyInjectionCampaign(container *dig.Container, routerGroup *gin.RouterGroup) error {
 	return container.Invoke(func(h *dependencies.HandlersContainer) {
 		campaignRouter.NewCampaignRoutes(routerGroup.Group("/campaigns"), h.CampaignHandler)
+	})
+}
+
+func InvokeDependencyInjectionTransaction(container *dig.Container, routerGroup *gin.RouterGroup) error {
+	return container.Invoke(func(h *dependencies.HandlersContainer) {
+		transactionRouter.NewTransactionRouter(routerGroup.Group("/transactions"), h.TransactionHandler)
 	})
 }

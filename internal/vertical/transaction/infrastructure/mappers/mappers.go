@@ -9,8 +9,8 @@ import (
 
 type Mapper struct{}
 
-func NewMapper() *Mapper {
-	return &Mapper{}
+func NewMapper() Mapper {
+	return Mapper{}
 }
 
 // MapTransactionRequestToTransaction maps a Transaction to a Transaction repository model

@@ -5,13 +5,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Router struct {
+type transactionRouter struct {
 	group   *gin.RouterGroup
 	handler *handlers.Handlers
 }
 
-func NewRouter(group *gin.RouterGroup, handlers *handlers.Handlers) *Router {
-	router := &Router{
+func NewTransactionRouter(group *gin.RouterGroup, handlers *handlers.Handlers) *transactionRouter {
+	router := &transactionRouter{
 		group:   group,
 		handler: handlers,
 	}
@@ -19,7 +19,7 @@ func NewRouter(group *gin.RouterGroup, handlers *handlers.Handlers) *Router {
 	return router
 }
 
-func (r *Router) register() {
+func (r *transactionRouter) register() {
 	r.group.POST("/", r.handler.CreateTransaction)
 	r.group.GET("/", r.handler.GetTransactionsByUserDocument)
 }
