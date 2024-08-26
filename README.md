@@ -6,6 +6,7 @@ Backend that implements a loyalty program
 
 - [Description](#description)
 - [Libraries and Dependencies](#libraries-and-dependencies)
+- [Start project](#start-project)
 
 ## Description
 
@@ -15,11 +16,10 @@ This project is a backend that implements a loyalty program. It is a REST API th
 
 ### Prerequisites
 
-- Go 1.16
-- Gin 1.9.0
-- Gorm 1.21.12
-- Uber Go Dig 1.12.0
-- Swagger 2.0.0
+- Go 1.21.9
+- Gin 1.10.0
+- Gorm 1.25.11
+- Uber Go Dig 1.18.0
 
 ### Installation
 
@@ -44,3 +44,21 @@ Allow to easily handle dependency injection in Go.
 ### Swagger
 
 Allow to easily create API documentation with and web UI interface.
+
+## Start project
+
+### Create docker image
+
+This application run using docker, so in order to run the application use:
+
+```bash
+  docker build -t loyalty_program .
+```
+
+### Run docker compose file
+
+In order to setup the application, once the docker image is created you can use the docker compose file to start the app and the database so it can be immediately use
+
+```bash
+  docker compose -d up
+```
