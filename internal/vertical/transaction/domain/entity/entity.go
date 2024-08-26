@@ -1,6 +1,8 @@
 package entity
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 )
 
@@ -13,7 +15,7 @@ type Transaction struct {
 	Amount          float64
 	PointsEarned    float64
 	CashbackEarned  float64
-	TransactionDate string
+	TransactionDate time.Time
 }
 
 func NewTransaction(transaction Transaction) *Transaction {
