@@ -23,6 +23,12 @@ func NewHandlers(mapper mappers.Mapper, service services.CampaignService) *Handl
 	}
 }
 
+// @Summary Create a new Campaign
+// @Description Create a new Campaign
+// @Tags Campaign
+// @Accept json
+// @Produce json
+// @Router /campaigns [post]
 // CreateCampaign creates a new campaign
 func (h *Handlers) CreateCampaign(c *gin.Context) {
 	var campaignRequest request.CreateCampaignRequest
@@ -43,6 +49,13 @@ func (h *Handlers) CreateCampaign(c *gin.Context) {
 }
 
 // GetCampaignsByCommerceID returns all campaigns by commerce id
+// @Summary Get Campaigns by Commerce ID
+// @Description Get Campaigns by Commerce ID
+// @Tags Campaign
+// @Accept json
+// @Produce json
+// @Param commerce_id path string true "Commerce ID"
+// GetCampaignsByCommerceID returns all campaigns by commerce id
 func (h *Handlers) GetCampaignsByCommerceID(c *gin.Context) {
 	commerceID := c.Param("commerce_id")
 	campaigns, err := h.service.GetCampaignByCommerceID(commerceID)
@@ -60,6 +73,13 @@ func (h *Handlers) GetCampaignsByCommerceID(c *gin.Context) {
 }
 
 // GetCampaignsByBranchID returns all campaigns by branch id
+// @Summary Get Campaigns by Branch ID
+// @Description Get Campaigns by Branch ID
+// @Tags Campaign
+// @Accept json
+// @Produce json
+// @Param branch_id path string true "Branch ID"
+// GetCampaignsByBranchID returns all campaigns by branch id
 func (h *Handlers) GetCampaignsByBranchID(c *gin.Context) {
 	branchID := c.Param("branch_id")
 	campaigns, err := h.service.GetCampaignsByBranchID(branchID)
@@ -76,6 +96,12 @@ func (h *Handlers) GetCampaignsByBranchID(c *gin.Context) {
 	c.JSON(http.StatusOK, campaignsResponse)
 }
 
+// @Summary Update a Campaign
+// @Description Update a Campaign
+// @Tags Campaign
+// @Accept json
+// @Produce json
+// @Router /campaigns [put]
 // UpdateCampaign updates a campaigns
 func (h *Handlers) UpdateCampaign(c *gin.Context) {
 	var campaignRequest request.UpdateCampaignRequest

@@ -3,15 +3,24 @@ package main
 import (
 	"fmt"
 
+	_ "github.com/dgsaltarin/loyalty_program_excersice/cmd/loyalty_program_excersice/docs"
 	"github.com/dgsaltarin/loyalty_program_excersice/internal/dependencies"
 	campaignRouter "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/campaign/infrastructure/rest/gin/routes"
 	commerceRouter "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/commerce/infrastructure/rest/gin/routes"
 	transactionRouter "github.com/dgsaltarin/loyalty_program_excersice/internal/vertical/transaction/infrastructure/rest/gin/router"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"go.uber.org/dig"
 )
 
+// @title Loyalty Program api
+// @version 1.0
+// @description This is a simple loyalty program api
+// @host localhost:8080
+// @BasePath /api/
+// @schemes http
 func main() {
 	ginInstance := SetupGin()
 
@@ -42,6 +51,7 @@ func main() {
 func SetupGin() *gin.Engine {
 	instance := gin.Default()
 
+	instance.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	return instance
 }
 

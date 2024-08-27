@@ -21,6 +21,12 @@ func NewHandlers(mapper mappers.Mapper, service services.CommerceServices) *Hand
 	}
 }
 
+// @Summary Create a new Commerce
+// @Description Create a new Commerce
+// @Tags Commerce
+// @Accept json
+// @Produce json
+// @Router /commerces [post]
 // CreateCommerce creates a new commerce
 func (h *Handlers) CreateCommerce(c *gin.Context) {
 	request := &request.CreateCommerceRequest{}
@@ -40,6 +46,12 @@ func (h *Handlers) CreateCommerce(c *gin.Context) {
 	c.JSON(http.StatusCreated, h.mapper.MapCommerceToCreateCommerceResponse(commerce))
 }
 
+// @Summary Create a new Branch
+// @Description Create a new Branch
+// @Tags Branch
+// @Accept json
+// @Produce json
+// @Router /branches [post]
 // CreateBranch creates a new branch
 func (h *Handlers) CreateBranch(c *gin.Context) {
 	request := &request.CreateBranchRequest{}

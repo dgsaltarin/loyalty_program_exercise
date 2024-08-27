@@ -62,3 +62,11 @@ In order to setup the application, once the docker image is created you can use 
 ```bash
   docker compose -d up
 ```
+
+### documentation
+
+To see the documentation of the API, you can go to the following URL:
+
+```bash
+  http://localhost:8080/swagger/index.html
+```

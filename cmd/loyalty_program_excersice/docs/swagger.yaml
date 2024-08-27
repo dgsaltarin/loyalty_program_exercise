@@ -1,0 +1,65 @@
+basePath: /api/
+host: localhost:8080
+info:
+  contact: {}
+  description: This is a simple loyalty program api
+  title: Loyalty Program api
+  version: "1.0"
+paths:
+  /branches:
+    post:
+      consumes:
+      - application/json
+      description: Create a new Branch
+      produces:
+      - application/json
+      responses: {}
+      summary: Create a new Branch
+      tags:
+      - Branch
+  /campaigns:
+    post:
+      consumes:
+      - application/json
+      description: Create a new Campaign
+      produces:
+      - application/json
+      responses: {}
+      summary: Create a new Campaign
+      tags:
+      - Campaign
+    put:
+      consumes:
+      - application/json
+      description: Update a Campaign
+      produces:
+      - application/json
+      responses: {}
+      summary: Update a Campaign
+      tags:
+      - Campaign
+  /commerces:
+    post:
+      consumes:
+      - application/json
+      description: Create a new Commerce
+      produces:
+      - application/json
+      responses: {}
+      summary: Create a new Commerce
+      tags:
+      - Commerce
+  /transactions:
+    post:
+      consumes:
+      - application/json
+      description: Create a new Transaction
+      produces:
+      - application/json
+      responses: {}
+      summary: Create a new Transaction
+      tags:
+      - Transaction
+schemes:
+- http
+swagger: "2.0"

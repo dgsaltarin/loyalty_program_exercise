@@ -1,0 +1,94 @@
+{
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a simple loyalty program api",
+        "title": "Loyalty Program api",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api/",
+    "paths": {
+        "/branches": {
+            "post": {
+                "description": "Create a new Branch",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Branch"
+                ],
+                "summary": "Create a new Branch",
+                "responses": {}
+            }
+        },
+        "/campaigns": {
+            "put": {
+                "description": "Update a Campaign",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Campaign"
+                ],
+                "summary": "Update a Campaign",
+                "responses": {}
+            },
+            "post": {
+                "description": "Create a new Campaign",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Campaign"
+                ],
+                "summary": "Create a new Campaign",
+                "responses": {}
+            }
+        },
+        "/commerces": {
+            "post": {
+                "description": "Create a new Commerce",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Commerce"
+                ],
+                "summary": "Create a new Commerce",
+                "responses": {}
+            }
+        },
+        "/transactions": {
+            "post": {
+                "description": "Create a new Transaction",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Transaction"
+                ],
+                "summary": "Create a new Transaction",
+                "responses": {}
+            }
+        }
+    }
+}

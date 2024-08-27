@@ -21,6 +21,12 @@ func NewHandlers(transactionService services.TransactionServices, mappers mapper
 	}
 }
 
+// @Summary Create a new Transaction
+// @Description Create a new Transaction
+// @Tags Transaction
+// @Accept json
+// @Produce json
+// @Router /transactions [post]
 func (h *Handlers) CreateTransaction(c *gin.Context) {
 	var transactionRequest request.CreateTransactionRequest
 
